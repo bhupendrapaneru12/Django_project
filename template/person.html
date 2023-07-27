@@ -1,0 +1,31 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <h1>Registration</h1>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label >Name:</label>
+        <label><input type="text" name="name" required></label><br>  
+        <label>age</label>
+        <label><input type= number age="age" name="age" required></label><br>
+        <label is_student>Is_student:</label>
+        <input type="radio" name="is_student" value=True >yes
+        <input type="radio" name="is_student" value=False >no<br>
+        <label email> Email:</label>
+        <input type="email" name="email" required><br>
+        <label message>Message:</label>
+        <input type="textarea"name="message" ><br>
+        <label message>Image:</label>
+        <input type="file" name="photo" ><br>
+        <button type="submit">submit</button>
+    </form>
+    <img src="{% static 'image/tiger.jpg'%}">
+    
+</body>
+</html>

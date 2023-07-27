@@ -1,0 +1,73 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Example</title>
+    <link rel="stylesheet" href="{% static 'register.css' %}">
+</head>
+<body>
+    <form id="myForm" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+
+        <div class="form-group">
+            <label for="photo">Photo:</label>
+            <input type="file" id="photo" name="photo" accept="image/*" required>
+        </div>
+
+        <div class="form-buttons">
+            <button type="submit" id="save-btn">Save</button>
+            <button type="button" id="cancel-btn">Cancel</button>
+        </div>
+    </form>
+
+    <table border="1px">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Photo</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for a in ob %}
+
+            <tr>
+                <td>{{a.id}}</td>
+                <td>{{a.name}}</td>
+                <td>{{a.email}}</td>
+                <td>{{a.password}}</td>
+                <td><img src="{{a.photo.url}}" height="80px" width="50px"></td>
+                <td>
+                    <a href="{% url 'user_update' a.id %}">update</a>
+                    <a href="{% url 'user_delete' a.id %}">delete</a>
+                    <!-- Add more action buttons or links as needed -->
+                </td>
+            </tr>
+            {% endfor %}
+            <!-- Add more rows for other users -->
+        </tbody>
+    </table>
+    
+ 
+</body>
+</html>
